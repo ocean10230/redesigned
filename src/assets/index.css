@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+
+@theme {
+    --font-lexend: 'Lexend', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
+
+    --color-primary: #364596;
+    --color-bright-primary: #5972ff;
+
+    --color-background: #1a1a22;
+
+    --color-border: #c0e1ff;
+}
+
+@layer base {
+    body { @apply bg-[#09090e] text-white/90 transition-none selection:bg-bright-primary selection:text-white }
+    button { @apply cursor-pointer disabled:cursor-default rounded-xl p-1.5 px-3 disabled:text-white/40 }
+    #root { @apply relative }
+}
+
+*::-webkit-scrollbar { @apply w-1.5 }
+*::-webkit-scrollbar-track { @apply bg-background/50 rounded-full }
+*::-webkit-scrollbar-thumb { @apply bg-bright-primary/50 rounded-full }
