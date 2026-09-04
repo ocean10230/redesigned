@@ -32,10 +32,15 @@ export default function RepositorySection() {
   const [refresh, set_refresh] = useState(0)
 
   useEffect(() => {(async () => {
-    const res = await fetch("https://api.github.com/users/ocean10230/repos")
-    if (!res.ok) set_repos(false)
-    const json = await res.json()
-    set_repos(json as GithubRepositoriesResponse[])
+    try {
+      const res = await fetch("https://api.github.com/users/ocean10230/repos")
+      if (!res.ok) return set_repos(false)
+      const json = await res.json()
+      set_repos(json as GithubRepositoriesResponse[])
+    }
+    catch {
+      set_repos(false)
+    }
   })()}, [refresh])
 
   return (
@@ -67,7 +72,7 @@ export default function RepositorySection() {
 
             <div className="bg-background/50 backdrop-blur-3xl p-3 rounded-md border-white/20 border flex flex-col gap-1">
               <div className="w-full flex gap-3">
-                <img src="/public/assets/icons/feather.png" className="size-18" />
+                <img src="/assets/icons/feather.png" className="size-18" />
                 <div className="font-lexend font-light">
                   <p className="font-poppins font-medium text-2xl">Feather</p>
                   <p className="leading-5">An absurdly small Microsoft Rewards automator that silently completes your daily task every day.</p>
@@ -76,43 +81,40 @@ export default function RepositorySection() {
               </div>
 
               <div className="flex gap-5 font-light items-center mt-2 text-gray-300/50 p-2 pt-0">
-                    <div className="flex gap-2 items-center">
-                      <span className="size-1.5 bg-bright-primary rounded-full" />
-                      <span>Typescript</span>
-                    </div>
+                <div className="flex gap-2 items-center">
+                  <span className="size-1.5 bg-bright-primary rounded-full" />
+                  <span>Typescript</span>
+                </div>
 
-                    <div className="hidden md:flex gap-2 items-center">
-                      <HardDrive className="size-4 text-bright-primary"/>
-                      <span>~20kb compiled</span>
-                    </div>
+                <div className="hidden md:flex gap-2 items-center">
+                  <HardDrive className="size-4 text-bright-primary"/>
+                  <span>~20kb compiled</span>
+                </div>
 
-                    <div onClick={() => window.open("https://github.com/ocean10230/feather")} className="flex gap-2 items-center cursor-pointer hover:text-bright-primary">
-                      <ArrowUpRight className="size-4 text-bright-primary" />
-                      <span className="hidden md:inline">View repository</span>
-                      <span className="inline md:hidden">View</span>
-                    </div>
+                <div onClick={() => window.open("https://github.com/ocean10230/feather")} className="flex gap-2 items-center cursor-pointer hover:text-bright-primary">
+                  <ArrowUpRight className="size-4 text-bright-primary" />
+                  <span className="hidden md:inline">View repository</span>
+                  <span className="inline md:hidden">View</span>
+                </div>
 
-                    {
-                      (() => {
-                        
+                {
+                  (() => {
+                    const [h,sh] = useState(false)
 
-                        return <a className="relative flex gap-2 items-center cursor-default">
-                          <User className="size-4 text-bright-primary" />
-                          <span>Join testing</span>
-                            <motion.div
-                              className="w-100 text-gray-300 z-50 absolute -left-9/10 top-0 bg-background/50 p-5 border border-bright-primary/50 pointer-events-auto"
-                              initial={{ y: 0, opacity: 0 }}
-                              animate={{ y: 0, opacity: 0 }}
-                              whileHover={{ y: 20, opacity: 1 }}
-                              transition={{
-                                ease:[0,0,0,1],duration:0.6
-                              }}
-                            >
-                              <p>Feather is missing testers. If you're a user, please consider contributing to make this project better. Thanks!</p>
-                            </motion.div>
-                        </a>
-                      })()
-                    }
+                    return <a onMouseEnter={() => sh(true)} onMouseLeave={() => sh(false)} className="relative flex gap-2 items-center cursor-default">
+                      <User className="size-4 text-bright-primary" />
+                      <span>Join testing</span>
+                        <motion.div
+                          className="pointer-events-none w-100 text-gray-300 z-50 absolute -left-9/10 top-0 bg-background/50 p-5 border border-bright-primary/50"
+                          initial={{ y: 0, opacity: 0 }}
+                          animate={h ? { y: 35, opacity: 1 } : { y: 0, opacity: 0 }}
+                          transition={{ ease:[0,0,0,1],duration:0.6 }}
+                        >
+                          <p>Feather is missing testers. If you're a user, please consider contributing to make this project better. Thanks!</p>
+                        </motion.div>
+                    </a>
+                  })()
+                }
               </div>
             </div>
           </div>

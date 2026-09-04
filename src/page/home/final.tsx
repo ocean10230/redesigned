@@ -206,21 +206,20 @@ export default function ContactSection() {
               lg:text-7xl
             "
           >
-            Have
-            an idea?
+            Have an idea?
           </h2>
 
           {/* Personal statement */}
           <p
             className="
-              mt-8 md:w-[110%] relative md:text-left
+              mt-8 relative md:text-right
               md:text-xl font-light
               leading-relaxed
               tracking-tight
-              text-white/75
+              text-white/75 whitespace-pre-line
             "
           >
-            Life is not forever, but I've got a dream 
+            Life is not forever, but I've got a dream {"\n"}
             so I gotta go and chase it.
           </p>
 
@@ -228,16 +227,13 @@ export default function ContactSection() {
           <p
             className="
               mt-5 ml-auto
-              max-w-md
-              text-sm font-light
-              leading-6
-              text-white/45
-              md:text-base
+              max-w-md text-sm font-light
+              leading-6 text-white/45
+              md:text-base whitespace-pre-line
             "
           >
-            Bring me anything — ideas, weird concepts, small
-            conversations, or something you&aposre not sure how to build.
-            I&aposll take it on and make it real.
+            My passion is the only thing that keeps me going {"\n"}
+            Bring me ideas, weird concepts, small, anything, I'll try to make it real. If I can't build, I'll learn
           </p>
 
           {/* CTA */}
