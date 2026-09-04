@@ -1,9 +1,9 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import Home from './page/home';
-import Transition from './layout/transition';
-import NotFound from './page/404';
-import Topbar from './layout/topbar';
-import Footer from './layout/footer';
+import Home from "@/page/home"
+import Transition from '@/layout/transition';
+import NotFound from '@/page/404';
+import Topbar from '@/layout/topbar';
+import Footer from '@/layout/footer';
 
 const routes = [
   {

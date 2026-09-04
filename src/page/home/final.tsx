@@ -3,6 +3,20 @@
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 
+async function createStitchedAsset(source: string, partCount: number) {
+  const partIndexes = Array.from({ length: partCount }, (_, i) => i)
+
+  const files = partIndexes.map(i => `${source}.part${String(i).padStart(2, "0")}`)
+
+  const responses = await Promise.all(files.map(file => fetch(file)))
+
+  const buffers = await Promise.all(responses.map(response => response.arrayBuffer()))
+  
+  const compositeBlob = new Blob(buffers, { type: "video/mp4" })
+
+  return URL.createObjectURL(compositeBlob)
+}
+
 export default function ContactSection() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -14,39 +28,15 @@ export default function ContactSection() {
 
   // 1. Hook to fetch and merge video chunks into a single source
   useEffect(() => {
-    const isMounted = true
-
-    async function stitchVideoChunks() {
-      try {
-        const totalParts = 20
-        
-        // Generates download tasks for parts .part01 through .part20 concurrently
-        const fetchPromises = Array.from({ length: totalParts }, (_, i) => {
-          const partNumber = String(i + 1).padStart(2, "0")
-          return fetch(`/assets/videos/shiddings.mp4.part${partNumber}`)
-            .then((res) => {
-              if (!res.ok) throw new Error(`Chunk ${partNumber} failed to download.`)
-              return res.arrayBuffer()
-            })
-        })
-
-        const buffers = await Promise.all(fetchPromises)
-        
-        if (!isMounted) return
-
-        // Combines binary fragments back into a single usable video Blob
-        const compositeBlob = new Blob(buffers, { type: "video/mp4" })
-        const localBlobUrl = URL.createObjectURL(compositeBlob)
-
-        setVideoUrl(localBlobUrl)
-        setIsReady(true)
-      } catch (error) {
-        console.error("Failed to assemble the video parts inline:", error)
-      }
+    if (!videoRef.current) return
+    const SetSource = async () => {
+      const stiched_url = await createStitchedAsset("/assets/videos/final/shiddings.mp4", 256)
+      setVideoUrl(stiched_url)
+      setIsReady(true)
     }
 
-    stitchVideoChunks()
-    }, [])
+    SetSource()
+  }, [])
 
 
   useEffect(() => {
