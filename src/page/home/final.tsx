@@ -1,78 +1,78 @@
-"use client";
+"use client"
 
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
 
 export default function ContactSection() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
 
   
   // Inline binary part assembly states
-  const [videoUrl, setVideoUrl] = useState<string>("");
-  const [isReady, setIsReady] = useState(false);
+  const [videoUrl, setVideoUrl] = useState<string>("")
+  const [isReady, setIsReady] = useState(false)
 
   // 1. Hook to fetch and merge video chunks into a single source
   useEffect(() => {
-    const isMounted = true;
+    const isMounted = true
 
     async function stitchVideoChunks() {
       try {
-        const totalParts = 20;
+        const totalParts = 20
         
         // Generates download tasks for parts .part01 through .part20 concurrently
         const fetchPromises = Array.from({ length: totalParts }, (_, i) => {
-          const partNumber = String(i + 1).padStart(2, "0");
+          const partNumber = String(i + 1).padStart(2, "0")
           return fetch(`/assets/videos/shiddings.mp4.part${partNumber}`)
             .then((res) => {
-              if (!res.ok) throw new Error(`Chunk ${partNumber} failed to download.`);
-              return res.arrayBuffer();
-            });
-        });
+              if (!res.ok) throw new Error(`Chunk ${partNumber} failed to download.`)
+              return res.arrayBuffer()
+            })
+        })
 
-        const buffers = await Promise.all(fetchPromises);
+        const buffers = await Promise.all(fetchPromises)
         
-        if (!isMounted) return;
+        if (!isMounted) return
 
         // Combines binary fragments back into a single usable video Blob
-        const compositeBlob = new Blob(buffers, { type: "video/mp4" });
-        const localBlobUrl = URL.createObjectURL(compositeBlob);
+        const compositeBlob = new Blob(buffers, { type: "video/mp4" })
+        const localBlobUrl = URL.createObjectURL(compositeBlob)
 
-        setVideoUrl(localBlobUrl);
-        setIsReady(true);
+        setVideoUrl(localBlobUrl)
+        setIsReady(true)
       } catch (error) {
-        console.error("Failed to assemble the video parts inline:", error);
+        console.error("Failed to assemble the video parts inline:", error)
       }
     }
 
-    stitchVideoChunks();
-    }, []);
+    stitchVideoChunks()
+    }, [])
 
 
   useEffect(() => {
-    const video = videoRef.current;
+    const video = videoRef.current
 
-    if (!video) return;
+    if (!video) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        setIsVisible(entry.isIntersecting)
 
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          video.play().catch(() => {})
         } else {
-          video.pause();
+          video.pause()
         }
       },
       {
         threshold: 0.7,
       }
-    );
+    )
 
-    observer.observe(video);
+    observer.observe(video)
 
-    return () => observer.disconnect();
-  }, []);
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section
@@ -236,8 +236,8 @@ export default function ContactSection() {
             "
           >
             Bring me anything — ideas, weird concepts, small
-            conversations, or something you&apos;re not sure how to build.
-            I&apos;ll take it on and make it real.
+            conversations, or something you&aposre not sure how to build.
+            I&aposll take it on and make it real.
           </p>
 
           {/* CTA */}
@@ -295,5 +295,5 @@ export default function ContactSection() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }
