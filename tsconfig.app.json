@@ -25,5 +25,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["types"]
+  "include": ["types", "src"]
 }

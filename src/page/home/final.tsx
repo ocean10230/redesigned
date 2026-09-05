@@ -3,40 +3,24 @@
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 
-async function createStitchedAsset(source: string, partCount: number) {
-  const partIndexes = Array.from({ length: partCount }, (_, i) => i)
-
-  const files = partIndexes.map(i => `${source}.part${String(i).padStart(2, "0")}`)
-
-  const responses = await Promise.all(files.map(file => fetch(file)))
-
-  const buffers = await Promise.all(responses.map(response => response.arrayBuffer()))
-  
-  const compositeBlob = new Blob(buffers, { type: "video/mp4" })
-
-  return URL.createObjectURL(compositeBlob)
-}
-
 export default function ContactSection() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
-
-  
-  // Inline binary part assembly states
-  const [videoUrl, setVideoUrl] = useState<string>("")
   const [isReady, setIsReady] = useState(false)
 
-  // 1. Hook to fetch and merge video chunks into a single source
   useEffect(() => {
-    if (!videoRef.current) return
-    const SetSource = async () => {
-      const stiched_url = await createStitchedAsset("/assets/videos/final/shiddings.mp4", 256)
-      setVideoUrl(stiched_url)
-      setIsReady(true)
+    // Register Service Worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/streaming.js")
+        .then((reg) => {
+          console.log("Stream SW Registered:", reg)
+          setIsReady(true)
+        })
+        .catch((err) => console.error("SW Registration failed:", err))
     }
-
-    SetSource()
   }, [])
+
 
 
   useEffect(() => {
@@ -91,9 +75,9 @@ export default function ContactSection() {
 
       {/* Video */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.video
+        { isReady && <motion.video
           ref={videoRef}
-          src={isReady ? videoUrl : undefined}
+          src={"/stream?url=/vid/shiddings.mp4&size=4&total=64"}
           muted loop playsInline
           animate={{
             opacity: isVisible ? 0.85 : 0.35,
@@ -116,7 +100,7 @@ export default function ContactSection() {
             object-cover
             object-center
           "
-        />
+        /> }
 
         {/* Keep the left side dark for the animation */}
         <div
