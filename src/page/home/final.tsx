@@ -75,10 +75,16 @@ export default function ContactSection() {
 
       {/* Video */}
       <div className="absolute inset-0 overflow-hidden">
-        { isReady && <motion.video
+        <motion.video
           ref={videoRef}
-          src={"/stream?url=/vid/shiddings.mp4&size=4&total=64"}
-          muted loop playsInline
+          src={"/stream?url=/assets/videos/final/shiddings.mp4&size=4&total=64"}
+          onLoadedData={() => {
+            const video = videoRef.current
+            if (!video) return
+            video.muted = true
+            video.playsInline = true
+            video.play()
+          }}
           animate={{
             opacity: isVisible ? 0.85 : 0.35,
             scale: isVisible ? 1 : 1.05,
@@ -100,7 +106,7 @@ export default function ContactSection() {
             object-cover
             object-center
           "
-        /> }
+        />
 
         {/* Keep the left side dark for the animation */}
         <div
