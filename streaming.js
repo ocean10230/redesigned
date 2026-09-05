@@ -7,8 +7,8 @@ const MB = (n) => n * 1024 * 1024
 
 const WorkerConfig = {
   MetadataMax: KB(256),
-  DataMax: KB(512),
-  ThrottleDuration: 150, // ms
+  DataMax: MB(1),
+  ThrottleDuration: 100, // ms
   ThrottleByteThreshold: MB(16), // Activate throttle after 16MB served
 }
 
