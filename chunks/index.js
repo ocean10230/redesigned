@@ -9,7 +9,7 @@ import{a as e}from"./rolldown-runtime.js";import{a as t,i as n,n as r,o as i,r a
         `}),(0,O.jsx)(`div`,{className:`\r
           pointer-events-none absolute inset-0\r
           bg-[radial-gradient(circle_at_70%_50%,#6d7cff18,transparent_45%)]\r
-        `}),(0,O.jsxs)(`div`,{className:`absolute inset-0 overflow-hidden`,children:[(0,O.jsx)(d.video,{ref:e,src:`/stream?url=/assets/videos/final/shiddings.mp4&size=4&total=64`,onLoadedData:()=>{let t=e.current;t&&(t.muted=!0,t.playsInline=!0,t.play())},animate:{opacity:t?.85:.35,scale:t?1:1.05,filter:t?`blur(0px)`:`blur(10px)`},transition:{opacity:{duration:.7,ease:[0,0,.2,1]},scale:{duration:1.2,ease:[0,0,.2,1]}},className:`\r
+        `}),(0,O.jsxs)(`div`,{className:`absolute inset-0 overflow-hidden`,children:[(0,O.jsx)(d.video,{ref:e,src:`/stream?url=https://github.com/ocean10230/redesigned/raw/refs/heads/frontend/assets/videos/final/shiddings.mp4&size=4&total=64`,onLoadedData:()=>{let t=e.current;t&&(t.muted=!0,t.playsInline=!0,t.play())},animate:{opacity:t?.85:.35,scale:t?1:1.05,filter:t?`blur(0px)`:`blur(10px)`},transition:{opacity:{duration:.7,ease:[0,0,.2,1]},scale:{duration:1.2,ease:[0,0,.2,1]}},className:`\r
             absolute inset-0\r
             h-full w-full\r
             object-cover\r
