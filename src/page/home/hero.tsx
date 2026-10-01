@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react"
-import { FadeIn } from "@/layout/fadein"
+import { FadeIn } from "@/layout/FadeIn"
 import {
   WebGLRenderer , Scene, PerspectiveCamera, IcosahedronGeometry,
   EdgesGeometry, MeshBasicMaterial, LineBasicMaterial, DoubleSide, AdditiveBlending, 
-  Mesh, LineSegments, Group, Clock
+  Mesh, LineSegments, Group, Timer
 } from "three"
 
 export default function HeroSection() {
@@ -109,7 +109,7 @@ export default function HeroSection() {
     handleResize()
     window.addEventListener("resize", handleResize)
 
-    const clock = new Clock()
+    const clock = new Timer()
     let animationFrameId: number
 
     function animate() {
@@ -137,9 +137,9 @@ export default function HeroSection() {
 
       centerpiece.rotation.y += dt * 0.25
       centerpiece.rotation.x =
-        currentRot.x * 0.6 + Math.sin(clock.getElapsedTime() * 0.4) * 0.04
+        currentRot.x * 0.6 + Math.sin(clock.getElapsed() * 0.4) * 0.04
       centerpiece.rotation.z =
-        currentRot.y * 0.05 + Math.sin(clock.getElapsedTime() * 0.3) * 0.02
+        currentRot.y * 0.05 + Math.sin(clock.getElapsed() * 0.3) * 0.02
 
       const s = scrollProxy.value
       icoEdgeMat.opacity = 0.9 - s * 0.55

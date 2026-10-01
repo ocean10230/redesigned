@@ -27,6 +27,8 @@ export default defineConfig({
               return "three.core"
             else if (id.includes("three.module"))
               return "three.module"
+            else if (id.includes("virtuoso"))
+              return "virtualizer"
             else if (id.includes("router"))
               return "router"
             else if (id.includes("react"))

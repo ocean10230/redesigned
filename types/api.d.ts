@@ -1,4 +1,10 @@
-declare type GithubRepositoriesResponse = {
+declare global {
+    interface Window {
+        useTitle: (Title: string) => void
+    }
+}
+
+declare interface GithubRepositoriesResponse {
     "id": number, "name": string, "full_name": `${string}/${string}`, "private": boolean,
     "owner": {
         "login": string,

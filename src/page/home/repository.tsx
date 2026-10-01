@@ -1,6 +1,5 @@
-import { ArrowUpRight, BookOpen, HardDrive, RefreshCcw, Star, User } from "lucide-react"
+import { ArrowUpRight, BookOpen, HardDrive, RefreshCcw, Star } from "lucide-react"
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
 
 const TextColumn = () => {
   return (
@@ -96,25 +95,6 @@ export default function RepositorySection() {
                   <span className="hidden md:inline">View repository</span>
                   <span className="inline md:hidden">View</span>
                 </div>
-
-                {
-                  (() => {
-                    const [h,sh] = useState(false)
-
-                    return <a onMouseEnter={() => sh(true)} onMouseLeave={() => sh(false)} className="relative flex gap-2 items-center cursor-default">
-                      <User className="size-4 text-bright-primary" />
-                      <span>Join testing</span>
-                        <motion.div
-                          className="pointer-events-none w-100 text-gray-300 z-50 absolute -left-9/10 top-0 bg-background/50 p-5 border border-bright-primary/50"
-                          initial={{ y: 0, opacity: 0 }}
-                          animate={h ? { y: 35, opacity: 1 } : { y: 0, opacity: 0 }}
-                          transition={{ ease:[0,0,0,1],duration:0.6 }}
-                        >
-                          <p>Feather is missing testers. If you're a user, please consider contributing to make this project better. Thanks!</p>
-                        </motion.div>
-                    </a>
-                  })()
-                }
               </div>
             </div>
           </div>

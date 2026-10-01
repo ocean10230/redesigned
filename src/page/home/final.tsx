@@ -6,13 +6,13 @@ import { useEffect, useRef, useState } from "react"
 export default function ContactSection() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [isReady, setIsReady] = useState(false)
+  const [ready, setIsReady] = useState(false)
 
   useEffect(() => {
     // Register Service Worker
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("/streaming.js")
+        .register("/scripts/streaming.js")
         .then((reg) => {
           console.log("Stream SW Registered:", reg)
           setIsReady(true)
@@ -77,7 +77,7 @@ export default function ContactSection() {
       <div className="absolute inset-0 overflow-hidden">
         <motion.video
           ref={videoRef}
-          src={"/stream?url=/assets/videos/final/shiddings.mp4&size=4&total=64"}
+          src={ready ? "/stream?url=https://raw.githubusercontent.com/ocean10230/redesigned/master/public/assets/videos/final/shiddings.mp4&size=4&total=64" : undefined}
           onLoadedData={() => {
             const video = videoRef.current
             if (!video) return

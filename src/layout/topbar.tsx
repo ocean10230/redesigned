@@ -17,7 +17,7 @@ const Topbar = () => {
         
         {/* Brand / Logo */}
         <a 
-          href="#" 
+          href="/" 
           className="text-sm tracking-wider text-white transition-colors flex items-center gap-2"
         >
           ocean102<span className="text-gray-500">.is-a.dev</span>
@@ -25,10 +25,10 @@ const Topbar = () => {
 
         {/* Central Navigation Links */}
         <nav className="hidden font-inter md:flex items-center gap-8 text-xs uppercase tracking-widest text-gray-400">
-          <a href="#home" className="hover:text-white transition-colors">Home</a>
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#repos" className="hover:text-white transition-colors">Projects</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+          <a href="/" className="hover:text-white transition-colors">Home</a>
+          <a href="/#about" className="hover:text-white transition-colors">About</a>
+          <a href="/#repos" className="hover:text-white transition-colors">Projects</a>
+          <a href="/#contact" className="hover:text-white transition-colors">Contact</a>
         </nav>
 
         {/* Action Buttons */}

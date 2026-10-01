@@ -21,9 +21,10 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
+
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["types"]
+  "include": ["src", "types"]
 }

@@ -1,4 +1,4 @@
-import { FadeIn } from "@/layout/fadein"
+import { FadeIn } from "@/layout/FadeIn"
 import { useState } from "react"
 
 const Button = () => {

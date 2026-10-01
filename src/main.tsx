@@ -9,9 +9,3 @@ createRoot(document.getElementById('root')!).render(<BrowserRouter>
     <App />
   </AnimatePresence>
 </BrowserRouter>)
-
-declare global {
-  interface Window {
-    useTitle: (Title: string) => void
-  }
-}

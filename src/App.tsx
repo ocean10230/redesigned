@@ -1,9 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import Home from "@/page/home"
-import Transition from '@/layout/transition';
+import Home from "@/page/Home"
+import Transition from '@/layout/Transition';
 import NotFound from '@/page/404';
-import Topbar from '@/layout/topbar';
-import Footer from '@/layout/footer';
+import Topbar from '@/layout/Topbar';
 
 const routes = [
   {
@@ -15,8 +14,6 @@ const routes = [
     element: <NotFound/>
   }
 ]
-
-window.useTitle = (Title: string) => (document.title = Title)
 
 function App() {
   const location = useLocation()
@@ -35,8 +32,6 @@ function App() {
         }
 
       </Routes>
-      
-      <Footer merge={location.pathname == "/"} />
     </>
   )
 }
