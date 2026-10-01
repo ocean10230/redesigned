@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom";
+import ToGitAssets from "@/hooks/ToGitAssets"
 
 const NotFound = () => {
     useTitle("Ocean - Not Found")
@@ -22,7 +23,7 @@ const NotFound = () => {
 
     return <div className="w-full h-screen flex flex-col justify-center items-center gap-4">
         <FadeIn className="absolute w-full h-full object-cover">
-            <video className="w-full h-full object-cover opacity-20 blur-xl" src="/assets/videos/fishin.mp4" autoPlay loop muted />
+            <video className="w-full h-full object-cover opacity-20 blur-xl" src="https://raw.githubusercontent.com/ocean10230/redesigned/master/public/assets/videos/fishin.mp4" autoPlay loop muted />
         </FadeIn>
 
         <FadeIn
@@ -52,7 +53,7 @@ const NotFound = () => {
                     </> : <>
                         {
                             goingBack &&
-                            <img className="w-full" src="/assets/explosion.gif" />
+                            <img className="w-full" src={ToGitAssets("assets/explosion.gif")} />
                         }
 
                         { !goingBack && <>

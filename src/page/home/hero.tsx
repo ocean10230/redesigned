@@ -3,7 +3,8 @@ import { FadeIn } from "@/layout/FadeIn"
 import {
   WebGLRenderer , Scene, PerspectiveCamera, IcosahedronGeometry,
   EdgesGeometry, MeshBasicMaterial, LineBasicMaterial, DoubleSide, AdditiveBlending, 
-  Mesh, LineSegments, Group, Timer
+  Mesh, LineSegments, Group,
+  Timer
 } from "three"
 
 export default function HeroSection() {

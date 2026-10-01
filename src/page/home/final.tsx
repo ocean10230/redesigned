@@ -9,6 +9,31 @@ export default function ContactSection() {
   const [ready, setIsReady] = useState(false)
 
   useEffect(() => {
+    const video = videoRef.current
+
+    if (!video) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting)
+
+        if (entry.isIntersecting) {
+          video.play().catch(() => {})
+        } else {
+          video.pause()
+        }
+      },
+      {
+        threshold: 0.4, // Updated to 0.4 to match your amount requirement
+      }
+    )
+
+    observer.observe(video)
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
     // Register Service Worker
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
