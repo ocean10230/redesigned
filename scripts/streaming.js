@@ -40,7 +40,9 @@ async function fetchPartBuffer(partIndex, totalParts, videoUrl) {
   const partUrl = `${videoUrl}.part${partNumber}`
 
   try {
-    const res = await fetch(partUrl)
+    const actualUrl = `https://raw.githubusercontent.com/ocean10230/redesigned/master/public` + partUrl
+    console.log(actualUrl)
+    const res = await fetch(actualUrl, { mode: "cors", cache: "reload" })
     if (!res.ok) return null
     return await res.arrayBuffer()
   } catch (err) {
